@@ -1,0 +1,12 @@
+.full-height{
+    height: 100%;
+}
+.page-title{
+    text-align: center;
+    color: darkred;
+    padding: 20px 0;
+}
+.card{
+    height: fit-content;
+    min-width: 700px;
+}

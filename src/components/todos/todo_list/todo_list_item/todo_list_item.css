@@ -1,0 +1,29 @@
+.todo_list_item{
+    padding: 10px 0;
+}
+.todo_list_item .todo_content{
+    display: inline;
+}
+
+.todo_list_item p {
+    margin-left: 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+.todo_list_item p.completed{
+    text-decoration: line-through;
+}
+
+.todo_list_item .delete_button{
+    float: right;
+    outline: none;
+    color: red;
+    font-weight: bold;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    margin-right: 10px;
+    background-color: transparent;
+    border: none;
+}

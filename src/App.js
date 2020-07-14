@@ -1,26 +1,52 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import ReactDOM from "react-dom";
+import "bootstrap/dist/css/bootstrap.min.css";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
+import * as authenticationService from "./services/authentication.services";
+
+import MainLayout from "./components/main-layout/main-layout";
+import Home from "./components/home/home";
+import Todo from "./components/todos/todo/todo";
+import Login from "./components/login/login";
+import Register from "./components/register/register";
+export default class App extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      loggedIn: false,
+    };
+  }
+
+  login = () => {
+    this.setState({ loggedIn: true });
+  }
+
+  logout = () => {
+    authenticationService.logout();
+    this.setState({ loggedIn: false });
+  }
+  render() {
+    this.state.loggedIn = authenticationService.check_login()
+    return (
+      <Router>
+        <MainLayout logout={this.logout} loggedIn={this.state.loggedIn}>
+          <Switch>
+            <Route path="/login">
+              <Login login={this.login}/>
+            </Route>
+            <Route path="/register">
+              <Register />
+            </Route>
+            <Route path="/todos">
+              <Todo />
+            </Route>
+            <Route  path="/">
+              <Home loggedIn={this.state.loggedIn}  />
+            </Route>
+          </Switch>
+        </MainLayout>
+      </Router>
+    );
+  }
 }
-
-export default App;
