@@ -1,5 +1,4 @@
 .todo_list{
     max-height: 300px;
     overflow-y: scroll;
-    width: calc(100% + 15px);
 }

@@ -1,5 +1,5 @@
 .todo_list_item{
-    padding: 10px 0;
+    padding: 10px 15px;
 }
 .todo_list_item .todo_content{
     display: inline;
@@ -13,6 +13,22 @@
 
 .todo_list_item p.completed{
     text-decoration: line-through;
+}
+
+.todo_list_item .todo_buttons{
+    float: right;
+    button{
+        margin: 0 10px;
+        background-color: transparent;
+        font-weight: bold;
+        font-size: 20px;
+        width: 20px;
+        height: 20px;
+        border: none;
+        outline: none;
+    }
+   
+    
 }
 
 .todo_list_item .delete_button{

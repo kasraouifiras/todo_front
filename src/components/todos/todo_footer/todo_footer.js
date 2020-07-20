@@ -1,23 +1,21 @@
 import React from "react";
-import ReactDOM from "react-dom";
 
 import "./todo_footer.scss";
-class TodoFooter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      filterType: "all",
-    };
-  }
 
+class TodoFooter extends React.Component {
   render() {
     let clearButton;
-    if (this.props.completedItems > 0) {
+    let completedItems = this.props.todos.filter((todo) => todo.completed)
+      .length;
+    if (completedItems > 0) {
       clearButton = (
         <a
           className="clear"
-          href="#"
-          onClick={(event) => this.props.clearCompleted(event)}
+          href="/"
+          onClick={(event) => {
+            event.preventDefault();
+            this.props.clearCompleted();
+          }}
         >
           Clear Completed
         </a>
@@ -26,40 +24,40 @@ class TodoFooter extends React.Component {
       clearButton = "";
     }
     return (
-      <div className="filter">
-        <p>{this.props.itemsLeft} items left</p>
+      <div className="filter container">
+        <p>{this.props.todos.length - completedItems} items left</p>
         <a
           className={`filter-button ${
-            this.state.filterType == "all" ? "active" : ""
+            this.props.filter === "all" ? "active" : ""
           }`}
-          href="#"
+          href="/"
           onClick={(event) => {
-            this.setState({ filterType: "all" });
-            this.props.filterTodos("all", event);
+            event.preventDefault();
+            this.props.changeFilter("all");
           }}
         >
           All
         </a>
         <a
           className={`filter-button ${
-            this.state.filterType == "active" ? "active" : ""
+            this.props.filter === "active" ? "active" : ""
           }`}
-          href="#"
+          href="/"
           onClick={(event) => {
-            this.setState({ filterType: "active" });
-            this.props.filterTodos("active", event);
+            event.preventDefault();
+            this.props.changeFilter("active");
           }}
         >
           Active
         </a>
         <a
           className={`filter-button ${
-            this.state.filterType == "completed" ? "active" : ""
+            this.props.filter === "completed" ? "active" : ""
           }`}
-          href="#"
+          href="/"
           onClick={(event) => {
-            this.setState({ filterType: "completed" });
-            this.props.filterTodos("completed", event);
+            event.preventDefault();
+            this.props.changeFilter("completed");
           }}
         >
           Completed

@@ -1,8 +1,8 @@
 import React from "react";
-import ReactDOM from "react-dom";
 
-import Card from "react-bootstrap/Card";
-import { Form, FormGroup, FormLabel, FormControl } from "react-bootstrap";
+import { Form, FormGroup, FormControl } from "react-bootstrap";
+
+
 class AddTodo extends React.Component {
   
   render() {

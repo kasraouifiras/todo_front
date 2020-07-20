@@ -1,9 +1,9 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "@fortawesome/fontawesome-free/css/all.css"
 
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import * as authenticationService from "./services/authentication.services";
+import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import * as authenticationService from "./services/authentication";
 
 import MainLayout from "./components/main-layout/main-layout";
 import Home from "./components/home/home";

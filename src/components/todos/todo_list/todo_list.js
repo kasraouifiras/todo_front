@@ -1,20 +1,47 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import TodoListItem from './todo_list_item/todo_list_item'
+
+
 import './todo_list.css'
-import TodoFooter from '../todo_footer/todo_footer';
+
 class TodoList extends React.Component{
     
-    
+    componentDidMount(){
+        this.props.requestTodos()
+    }
+
+    componentWillUnmount(){
+        
+    }
+
     render(){
-        return(
-            <div className="container">
+        let pinnedTodos=this.props.todos.filter((todo) => todo.pinned)
+        console.log(pinnedTodos)
+        let todos = this.props.todos.filter((todo) => !todo.pinned)
+        if(pinnedTodos.length===0 && todos.length===0){
+            return (<div><div className="todo_list"><p className="text-center">You have no todos</p></div></div>)
+        }else if(pinnedTodos.length>0 && todos.length===0){
+            return (<div>
+            <div className="todo_list">
+            <h3 className="text-center">Pinned Todos</h3>
+            {pinnedTodos.map((todo)=><TodoListItem key={todo.id} deleteTodo={this.props.deleteTodo} updateTodo={this.props.updateTodo} todo={todo} />)}
+            </div></div>)
+        }else if(pinnedTodos.length===0 && todos.length>0){
+            return (
+                <div>
+            <div className="todo_list">
+            <h3 className="text-center">All Todos</h3>
+            {todos.map((todo)=><TodoListItem key={todo.id} deleteTodo={this.props.deleteTodo} updateTodo={this.props.updateTodo} todo={todo} />)}
+            </div></div>)
+        }else if(pinnedTodos.length>0 && todos.length>0){
+            return (<div>
                 <div className="todo_list">
-                    {this.props.todos.length>0 && this.props.todos.map((todo)=><TodoListItem key={todo.id} deleteTodo={this.props.deleteTodo} toggleTodo={this.props.toggleTodo} todo={todo} />)}
-                </div>
-                <TodoFooter completedItems={this.props.completedItems} itemsLeft={this.props.itemsLeft} clearCompleted={this.props.clearCompleted} filterTodos={this.props.filterTodos}/>
-            </div>
-        )
+                <h3 className="text-center">Pinned Todos</h3>
+                {pinnedTodos.map((todo)=><TodoListItem key={todo.id} deleteTodo={this.props.deleteTodo} updateTodo={this.props.updateTodo} todo={todo} />)}
+                <h3 className="text-center">Other Todos</h3>
+                {todos.map((todo)=><TodoListItem key={todo.id} deleteTodo={this.props.deleteTodo} updateTodo={this.props.updateTodo} todo={todo} />)}
+                </div></div>)
+        }
     }
 }
 

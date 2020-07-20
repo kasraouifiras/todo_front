@@ -1,7 +1,6 @@
 import React from "react";
-import ReactDOM from "react-dom";
 import { Redirect } from "react-router-dom";
-import * as authenticationService from "../../services/authentication.services";
+import * as authenticationService from "../../services/authentication";
 
 import "./register.scss";
 
