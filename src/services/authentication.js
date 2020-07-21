@@ -21,7 +21,6 @@ export function check_login(){
 }
 
 export function login(credentials){
-  console.log(credentials)
   return api.post("/api/login_check",credentials).then(res =>res.data)
   .then(res =>{
     if(res.token){

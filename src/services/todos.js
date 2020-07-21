@@ -21,7 +21,6 @@ export function deleteTodo(todo_id) {
 }
 
 export function updateTodo(todo_id, data) {
-  console.log(data)
   return api.put("/" + todo_id, data, { headers: authHeader() });
 }
 

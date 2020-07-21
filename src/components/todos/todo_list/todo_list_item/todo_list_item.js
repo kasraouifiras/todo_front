@@ -7,8 +7,6 @@ class TodoListItem extends React.Component {
 
   onBackgroundChange = (e, id) => {
     e.persist()
-    console.log(e)
-    console.log(e.target.value)
     this.props.updateTodo(id, { color: e.target.value }, 'color')
   };
 

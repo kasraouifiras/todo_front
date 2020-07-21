@@ -1,7 +1,7 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
 import * as authenticationService from "../../services/authentication";
-
+import AuthContext from '../../contexts/AuthContext';
 import "./login.scss";
 
 export default class Login extends React.Component {
@@ -13,7 +13,6 @@ export default class Login extends React.Component {
         username: "",
         password: "",
       },
-      redirect : authenticationService.check_login()?'todos':null
     };
   }
 
@@ -35,13 +34,12 @@ export default class Login extends React.Component {
     });
   }
 
-  login = (e) => {
+  login = (e,updateLoggedIn) => {
     e.preventDefault();
     authenticationService.login(this.state.loginform).then(
       (res) => {
         console.log(res);
-        this.props.login()
-        this.setState({redirect:'/todos'})
+        updateLoggedIn()
       },
       (error) => {
         console.log(error);
@@ -51,11 +49,11 @@ export default class Login extends React.Component {
   
 
   render() {
-    if (this.state.redirect) {
-        return <Redirect to={this.state.redirect} />
-    }
     return (
-      <div className="login-form d-flex justify-content-center text-center">
+      <AuthContext.Consumer>
+      {context=>(    
+        <div className="login-form d-flex justify-content-center text-center">
+        {context.isLoggedIn && <Redirect to="todos" />}
         <form>
           <h1>Login to the TODOS app</h1>
           <h4>Fill in the form to login</h4>
@@ -82,11 +80,13 @@ export default class Login extends React.Component {
               onChange={(e) => this.onPasswordChange(e)}
             />
           </div>
-          <button onClick={(e) => this.login(e)} className="btn btn-primary">
+          <button onClick={(e) => this.login(e,context.updateLoggedIn)} className="btn btn-primary">
             Login
           </button>
         </form>
       </div>
+      )}
+      </AuthContext.Consumer>
     );
   }
 }

@@ -16,7 +16,6 @@ class TodoList extends React.Component{
 
     render(){
         let pinnedTodos=this.props.todos.filter((todo) => todo.pinned)
-        console.log(pinnedTodos)
         let todos = this.props.todos.filter((todo) => !todo.pinned)
         if(pinnedTodos.length===0 && todos.length===0){
             return (<div><div className="todo_list"><p className="text-center">You have no todos</p></div></div>)
