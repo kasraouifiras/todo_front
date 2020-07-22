@@ -4,25 +4,12 @@ import {
   updateTodoRequest,
   deleteTodoRequest,
 } from "../actions";
-
+import { getFiltredTodos } from '../selectors';
 import TodoList from "../components/todos/todo_list/todo_list";
 
 
-const getFiltredTodos = (todos, filter) => {
-  switch (filter) {
-    case "all":
-      return todos;
-    case "completed":
-      return todos.filter((todo) => todo.completed);
-    case "active":
-      return todos.filter((todo) => !todo.completed);
-    default:
-      return todos;
-  }
-};
-
 const mapStateToProps = (state) => ({
-  todos: getFiltredTodos(state.todos, state.todosFilter),
+  todos: getFiltredTodos(state),
 });
 
 const mapDispatchToProps = (dispatch) => ({

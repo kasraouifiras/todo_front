@@ -1,5 +1,4 @@
 import axios from "axios";
-import authHeader from '../helpers/authHelper';
 const api = axios.create({
   baseURL: "http://localhost:8000/api/todos",
 });
@@ -10,7 +9,6 @@ api.interceptors.request.use(function(config) {
   if ( token != null ) {
     config.headers.Authorization = `Bearer ${token}`;
   }
-
   return config;
 }, function(err) {
   return Promise.reject(err);
