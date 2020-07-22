@@ -1,5 +1,5 @@
 import React from "react";
-import { Redirect } from "react-router-dom";
+import { Redirect, Link } from "react-router-dom";
 import * as authenticationService from "../../services/authentication";
 import AuthContext from "../../contexts/AuthContext";
 import "./register.scss";
@@ -100,7 +100,7 @@ export default class Register extends React.Component {
         {(context) => (
           <div className="register-form d-flex justify-content-center text-center">
             {context.isLoggedIn && <Redirect to="todos" />}
-            <form>
+            <form className="card">
               <h1>Registration for the TODOS app</h1>
               <h4>Fill in the form to register</h4>
               <div className="row">
@@ -162,6 +162,13 @@ export default class Register extends React.Component {
               >
                 Register
               </button>
+              <p style={{marginTop:20+'px'}}>If you already have an account go 
+              <Link
+                to="/login"
+                className="nav-link"
+              >
+                Login
+              </Link></p>
             </form>
           </div>
         )}
